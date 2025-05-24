@@ -37,6 +37,8 @@ def get_stock():
         # Suppose qu’il y a une vraie route API ici :
         product_api_url = "https://app.shipper.market/api/products/704b3a71-d020-47ad-a945-fffa62fd083e"
         response = session.get(product_api_url, headers=headers)
+        print("📦 Code produit:", response.status_code)
+        print("📦 Réponse produit:", response.text)
 
         if response.status_code != 200:
             print("❌ Erreur chargement API produit")
