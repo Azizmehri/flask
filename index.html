@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock en temps réel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        #stock {
+            font-size: 2em;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>📦 Stock Actuel</h1>
+    <div id="stock">Chargement...</div>
+
+    <script>
+        async function fetchStock() {
+            try {
+                const response = await fetch("/get-stock");
+                const data = await response.json();
+                document.getElementById("stock").innerText =
+                    data.stock !== undefined ? data.stock : "Erreur de récupération";
+            } catch (error) {
+                document.getElementById("stock").innerText = "Erreur de connexion";
+                console.error(error);
+            }
+        }
+
+        setInterval(fetchStock, 15000);
+        fetchStock();
+    </script>
+</body>
+</html>
